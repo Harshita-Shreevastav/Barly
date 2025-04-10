@@ -24,12 +24,12 @@
       align-items: center;
       font-size: 24px;
       font-weight: bold;
-      margin-left: 50px;
+      margin-left: 60px; /* shifted more right */
     }
 
     .logo img {
       height: 30px;
-      margin-right: 2px; /* Reduced more */
+      margin-right: 5px;
     }
 
     .search-bar {
@@ -67,6 +67,19 @@
       font-size: 18px;
       margin-left: 10px;
       cursor: pointer;
+    }
+
+    .subscribe-btn {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 8px 25px; /* added left and right padding */
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 15px;
+      margin-right: 10px; /* spacing from the edge */
+      font-weight: 600;
     }
 
     .notification {
@@ -115,7 +128,6 @@
 
     <div class="search-bar">
       <div class="mic-icon">
-        <!-- Clean mic SVG icon -->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 14 0h-2zm-5 9v-3h-2v3h2z"/>
         </svg>
@@ -126,6 +138,8 @@
       </div>
       <div class="notification">🔔</div>
     </div>
+
+    <button class="subscribe-btn">Subscribe</button>
   </div>
 
   <div class="nav">
@@ -139,5 +153,3 @@
 
 </body>
 </html>
-
-
