@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login / Sign Up</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8eaea;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 320px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #d94f4f;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #d94f4f;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .toggle {
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .toggle a {
+      color: #d94f4f;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    #email {
+      display: none;
+    }
+
+    .success {
+      text-align: center;
+      margin-top: 10px;
+      color: green;
+    }
+
+    .error {
+      text-align: center;
+      margin-top: 10px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 id="form-title">Login</h2>
+    <form id="auth-form">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <input type="email" id="email" placeholder="Email (Sign Up only)" />
+      <button type="submit">Submit</button>
+      <div id="message" class="success"></div>
+    </form>
+    <div class="toggle">
+      <span id="toggle-text">Don't have an account?</span>
+      <a onclick="toggleMode()">Sign Up</a>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("auth-form");
+    const emailField = document.getElementById("email");
+    const toggleText = document.getElementById("toggle-text");
+    const formTitle = document.getElementById("form-title");
+    const link = document.querySelector(".toggle a");
+    const message = document.getElementById("message");
+    let mode = "login";
+
+    function toggleMode() {
+      if (mode === "login") {
+        mode = "signup";
+        emailField.style.display = "block";
+        formTitle.innerText = "Sign Up";
+        toggleText.innerText = "Already have an account?";
+        link.innerText = "Login";
+        message.textContent = "";
+      } else {
+        mode = "login";
+        emailField.style.display = "none";
+        formTitle.innerText = "Login";
+        toggleText.innerText = "Don't have an account?";
+        link.innerText = "Sign Up";
+        message.textContent = "";
+      }
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const email = document.getElementById("email").value;
+
+      if (mode === "signup") {
+        message.className = "success";
+        message.textContent = `Signed up as ${username} with email ${email}`;
+      } else {
+        message.className = "success";
+        message.textContent = `Welcome back, ${username}!`;
+      }
+    });
+  </script>
+</body>
+</html>
