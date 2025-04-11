@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Explore Skills | Barly</title>
-  <link rel="stylesheet" href="../style.css" />
+  <title>Explore Skills - Barly</title>
+  <link rel="icon" href="../assets/logo.png" />
   <style>
     :root {
       --primary: #ff4f4f;
@@ -14,8 +14,13 @@
       --bg: #f9f9f9;
     }
 
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--bg);
       color: var(--text-dark);
@@ -23,12 +28,15 @@
 
     /* Header */
     header {
-      background-color: #ffffffee;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      background-color: white;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
     .logo-bar {
@@ -64,30 +72,45 @@
       color: white;
     }
 
-    /* Search Bar */
-    .search-container {
-      max-width: 600px;
-      margin: 2rem auto;
+    /* Main section with background */
+    .main-content {
+      background-image: url('../assets/bg_doodle.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      padding-top: 4rem;
+    }
+
+    /* Search Wrapper Box */
+    .search-box {
+      background: white;
+      max-width: 650px;
+      margin: 3rem auto 2rem auto;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
 
-    .search-container input {
-      padding: 0.7rem;
+    .search-box input {
+      padding: 0.8rem;
       width: 60%;
       border: 1px solid var(--gray);
       border-radius: 8px;
       margin-right: 0.5rem;
     }
 
-    .search-container button {
-      padding: 0.7rem 1.2rem;
-      border: none;
-      border-radius: 8px;
+    .search-box button {
+      padding: 0.8rem 1.5rem;
       background-color: var(--primary);
       color: white;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
     }
 
+    /* Users list */
     .users-list {
       max-width: 800px;
       margin: 2rem auto;
@@ -152,6 +175,7 @@
       display: none;
       justify-content: center;
       align-items: center;
+      z-index: 999;
     }
 
     .popup {
@@ -180,7 +204,6 @@
       text-decoration: none;
       border-radius: 8px;
     }
-
   </style>
 </head>
 <body>
@@ -197,14 +220,17 @@
     </div>    
   </header>
 
-  <!-- Search Bar -->
-  <div class="search-container">
-    <input type="text" id="skillInput" placeholder="Search a skill...">
-    <button onclick="searchSkill()">Search</button>
-  </div>
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Search Box -->
+    <div class="search-box">
+      <input type="text" id="skillInput" placeholder="Search a skill...">
+      <button onclick="searchSkill()">Search</button>
+    </div>
 
-  <!-- User List -->
-  <div class="users-list" id="usersList"></div>
+    <!-- User List -->
+    <div class="users-list" id="usersList"></div>
+  </div>
 
   <!-- Popup -->
   <div class="popup-overlay" id="popup">
@@ -273,7 +299,7 @@
       if (e.target === this) this.style.display = "none";
     });
   </script>
-
 </body>
 </html>
+
 
