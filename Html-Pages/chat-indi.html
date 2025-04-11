@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Coral Chat UI</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      width: 400px;
+      height: 600px;
+      background-color: #fff;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      border: 2px solid #ff5e3a;
+    }
+
+    .chat-header {
+      background-color: #ff5e3a;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background-color: #fffaf8;
+    }
+
+    .message {
+      max-width: 75%;
+      padding: 10px 14px;
+      font-size: 14px;
+      line-height: 1.4;
+      border-radius: 20px;
+      position: relative;
+      word-wrap: break-word;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .sent {
+      align-self: flex-end;
+      background-color: #ff5e3a;
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .received {
+      align-self: flex-start;
+      background-color: #f1f1f1;
+      color: #333;
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #eee;
+      padding: 10px;
+      background-color: #fff;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px 14px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      outline: none;
+    }
+
+    .chat-input button {
+      margin-left: 10px;
+      background-color: #ff5e3a;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      font-size: 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .chat-input button:hover {
+      background-color: #e04b28;
+    }
+
+    /* Scrollbar styling (optional) */
+    .chat-messages::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      background-color: #ffb6a2;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="chat-container">
+    <div class="chat-header">💬 Chat</div>
+    <div class="chat-messages" id="chat-messages">
+      <!-- Message history goes here -->
+    </div>
+    <div class="chat-input">
+      <input type="text" id="msgInput" placeholder="Type a message..." />
+      <button onclick="sendMsg()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMsg() {
+      const input = document.getElementById("msgInput");
+      const msgText = input.value.trim();
+      if (!msgText) return;
+
+      const msgBox = document.getElementById("chat-messages");
+
+      // User message
+      const userMsg = document.createElement("div");
+      userMsg.classList.add("message", "sent");
+      userMsg.innerText = msgText;
+      msgBox.appendChild(userMsg);
+      input.value = "";
+
+      msgBox.scrollTop = msgBox.scrollHeight;
+
+      // Auto-reply after 1 second
+      setTimeout(() => {
+        const reply = document.createElement("div");
+        reply.classList.add("message", "received");
+        reply.innerText = "That's interesting!";
+        msgBox.appendChild(reply);
+        msgBox.scrollTop = msgBox.scrollHeight;
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>
