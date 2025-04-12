@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Barly - Explore</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
     }
 
     .header {
@@ -25,6 +26,8 @@
       font-size: 24px;
       font-weight: bold;
       margin-left: 60px;
+      text-decoration: none;
+      color: white;
     }
 
     .logo img {
@@ -113,18 +116,73 @@
     }
 
     .main {
-      margin-left: 200px;
-      padding: 20px;
+      margin-left: 80px;
+      padding: 30px;
+    }
+
+    .user-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .user-info img {
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+      margin-right: 15px;
+      object-fit: cover;
+    }
+
+    .user-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .user-name {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .user-skill {
+      color: #666;
+    }
+
+    .connect-btn {
+      background-color: #ff4f4f;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .connect-btn:hover {
+      background-color: #e84141;
     }
   </style>
 </head>
 <body>
 
+  <!-- Header -->
   <div class="header">
-    <div class="logo">
-      <img src="../assets/Logo.png" alt="Logo">
+    <a href="post-home-page.html" class="logo">
+      <img src="../assets/Logo.png" alt="Logo" />
       Barly
-    </div>
+    </a>
 
     <div class="search-bar">
       <div class="mic-icon">
@@ -133,8 +191,8 @@
         </svg>
       </div>
       <div class="search-box">
-        <input type="text" placeholder="Search...">
-        <span class="icon">🔍</span>
+        <input type="text" placeholder="Search skills..." id="skillInput" />
+        <span class="icon" onclick="filterUsers()">🔍</span>
       </div>
       <div class="notification">🔔</div>
     </div>
@@ -142,13 +200,73 @@
     <button class="subscribe-btn">Subscribe</button>
   </div>
 
+  <!-- Side Nav -->
   <div class="nav">
     <a href="user-profile.html" title="Profile">👤</a>
-    <a href="#" title="Home">🏠</a>
+    <a href="post-home-page.html" title="Home">🏠</a>
     <a href="history.html" title="History">📜</a>
     <a href="stats.html" title="Statistics">📈</a>
     <a href="chat.html" title="Chat">💬</a>
   </div>
 
+  <!-- Main Content -->
+  <div class="main" id="userList">
+    <h2>Recommended for You</h2>
+    <!-- Cards will be inserted here -->
+  </div>
+
+  <script>
+    const allUsers = [
+      { name: "Aarav Mehta", skill: "Python", img: "https://randomuser.me/api/portraits/men/1.jpg" },
+      { name: "Neha Sharma", skill: "Cooking", img: "https://randomuser.me/api/portraits/women/2.jpg" },
+      { name: "Rohan Das", skill: "Java", img: "https://randomuser.me/api/portraits/men/3.jpg" },
+      { name: "Priya Iyer", skill: "Public Speaking", img: "https://randomuser.me/api/portraits/women/4.jpg" },
+      { name: "Aditya Rao", skill: "Python", img: "https://randomuser.me/api/portraits/men/5.jpg" },
+      { name: "Sneha Kulkarni", skill: "Photography", img: "https://randomuser.me/api/portraits/women/6.jpg" },
+      { name: "Dev Patel", skill: "JavaScript", img: "https://randomuser.me/api/portraits/men/7.jpg" },
+      { name: "Kavya Menon", skill: "Python", img: "https://randomuser.me/api/portraits/women/8.jpg" },
+      { name: "Anjali Singh", skill: "Web Design", img: "https://randomuser.me/api/portraits/women/9.jpg" },
+    ];
+
+    const userList = document.getElementById("userList");
+
+    function renderUsers(users, heading = "Recommended for You") {
+      userList.innerHTML = `<h2>${heading}</h2>`;
+      users.forEach(user => {
+        const card = document.createElement("div");
+        card.className = "user-card";
+        card.innerHTML = `
+          <div class="user-info">
+            <img src="${user.img}" alt="${user.name}" />
+            <div class="user-details">
+              <div class="user-name">${user.name}</div>
+              <div class="user-skill">Skill: ${user.skill}</div>
+            </div>
+          </div>
+          <a href="chat-indi.html" class="connect-btn">Connect</a>
+        `;
+        userList.appendChild(card);
+      });
+    }
+
+    function filterUsers() {
+      const input = document.getElementById("skillInput").value.toLowerCase();
+      const matches = allUsers.filter(user =>
+        user.skill.toLowerCase().includes(input)
+      );
+      if (matches.length > 0) {
+        renderUsers(matches, `Results for "${input}"`);
+      } else {
+        userList.innerHTML = `<h2>No users found for "${input}"</h2>`;
+      }
+    }
+
+    // Show default recommendations
+    renderUsers(allUsers.slice(0, 4));
+  </script>
+
 </body>
 </html>
+
+
+

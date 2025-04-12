@@ -83,7 +83,7 @@
       <input type="text" id="username" placeholder="Username" required />
       <input type="password" id="password" placeholder="Password" required />
       <input type="email" id="email" placeholder="Email (Sign Up only)" />
-      <button type="submit" onclick="window.location.href='application.html'">Submit</button>
+      <button type="submit">Submit</button>
       <div id="message" class="success"></div>
     </form>
     <div class="toggle">
@@ -101,6 +101,7 @@
     const message = document.getElementById("message");
     let mode = "login";
 
+    // Toggle between login and signup mode
     function toggleMode() {
       if (mode === "login") {
         mode = "signup";
@@ -119,20 +120,52 @@
       }
     }
 
+    // Form submit handler
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
       const email = document.getElementById("email").value;
 
+      // Basic validation
+      if (!username || !password) {
+        message.className = "error";
+        message.textContent = "Please enter all required fields.";
+        return;
+      }
+
+      // Simulate login/signup
       if (mode === "signup") {
+        if (!email) {
+          message.className = "error";
+          message.textContent = "Please enter a valid email for sign-up.";
+          return;
+        }
+        // Save user data to localStorage (or ideally to a database)
+        localStorage.setItem("user", JSON.stringify({ username, password, email }));
         message.className = "success";
         message.textContent = `Signed up as ${username} with email ${email}`;
       } else {
-        message.className = "success";
-        message.textContent = `Welcome back, ${username}!`;
+        // Check if user exists in localStorage (for login)
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (storedUser && storedUser.username === username && storedUser.password === password) {
+          message.className = "success";
+          message.textContent = `Welcome back, ${username}!`;
+          // Redirect to main page or application page after login
+          setTimeout(function() {
+            window.location.href = "application.html";
+          }, 1000);
+        } else {
+          message.className = "error";
+          message.textContent = "Invalid username or password.";
+        }
       }
     });
   </script>
 </body>
 </html>
+
+
+
+
