@@ -1,9 +1,11 @@
 
 
-Barly – Sow What You Know. Reap What You Learn.
 
 
-# Barly[https://harshita-shreevastav.github.io/Barly/)
+
+# Barly - https://harshita-shreevastav.github.io/Barly/
+
+ Sow What You Know. Reap What You Learn.
  
 Problem Statement
 Many learners and enthusiasts struggle to find personalized, real-time guidance when exploring new skills. Existing platforms are either too expensive, lack engagement, or don't foster true peer-to-peer connection. There's a need for an interactive, affordable, and community-driven platform that makes learning and mentorship more human, accessible, and skill-focused.
