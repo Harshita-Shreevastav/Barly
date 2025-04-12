@@ -1,4 +1,7 @@
+
+
 # Barly
+
 Barly – Sow What You Know. Reap What You Learn.
  
 Problem Statement
@@ -11,6 +14,7 @@ Barly operates on a subscription-based model with the following revenue streams:
 🚫 Ad-Free Option: Subscribers get an ad-free experience as part of their plan.
 
 This model ensures a balance between accessibility and sustainability while enhancing user experience for paid members.
+
 
 👨 User A (Initiator)
 Sign Up & Add Skills
@@ -63,6 +67,7 @@ Share feedback to help build trust in the community
 
 🔁 Repeat or Subscribe for More
 Users can continue trading skills, explore new matches, or subscribe for premium features.
+
 
 
 
