@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8eaea;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+
+    .header {
+      background: #ff4f4f;
+      color: white;
+      padding: 15px;
+      width: 100%;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
+
+    .message-container {
+      width: 100%;
+      max-width: 600px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: white;
+      padding: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .message {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+    }
+
+    .message .sender {
+      font-weight: bold;
+      color: #d94f4f;
+    }
+
+    .message .content {
+      margin-top: 5px;
+      color: #555;
+    }
+
+    .input-area {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .input-area input {
+      width: 80%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .input-area button {
+      width: 15%;
+      background: #ff4f4f;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .input-area button:hover {
+      background: #ff8888;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">Messages</div>
+
+  <div class="message-container">
+    <div class="message">
+      <div class="sender">John Doe</div>
+      <div class="content">Hey, let's connect! I have some great ideas to share.</div>
+    </div>
+    <div class="message">
+      <div class="sender">Jane Smith</div>
+      <div class="content">Looking forward to collaborating on the new project!</div>
+    </div>
+    <!-- More messages here -->
+  </div>
+
+  <div class="input-area">
+    <input type="text" id="message-input" placeholder="Type a message..." />
+    <button id="send-button">Send</button>
+  </div>
+
+  <script>
+    const sendButton = document.getElementById("send-button");
+    const messageInput = document.getElementById("message-input");
+
+    sendButton.addEventListener("click", function() {
+      const newMessage = messageInput.value.trim();
+      if (newMessage) {
+        const messageContainer = document.querySelector(".message-container");
+        
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("message");
+        
+        const senderElement = document.createElement("div");
+        senderElement.classList.add("sender");
+        senderElement.textContent = "You";
+
+        const contentElement = document.createElement("div");
+        contentElement.classList.add("content");
+        contentElement.textContent = newMessage;
+
+        messageElement.appendChild(senderElement);
+        messageElement.appendChild(contentElement);
+
+        messageContainer.appendChild(messageElement);
+        messageInput.value = "";
+      }
+    });
+  </script>
+
+</body>
+</html>
+
