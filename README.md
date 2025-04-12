@@ -1,3 +1,7 @@
+
+
+# Barly
+
 Barly – Sow What You Know. Reap What You Learn.
  
 Problem Statement
@@ -11,22 +15,59 @@ Barly operates on a subscription-based model with the following revenue streams:
 
 This model ensures a balance between accessibility and sustainability while enhancing user experience for paid members.
 
-Matching Algorithm
-[ User A ]                         [ User B ]
-   👩                                 👨
-   | 1. Sign up & add skills         | 1. Sign up & add skills
-   | 2. Browse/Search skills         | 2. Browse/Search skills
-   | 3. Send Skill Trade Request -->| 3. Accepts Request
-   |<--------- Match Found ---------|
-   | 4. Set Schedule & Time         | 4. Set Schedule & Time
-   |----- Real-time Session (Video/Chat) ---->
-   | 5. Exchange ratings & feedback | 5. Same
 
-            🔁 (Repeat / Subscribe to more)
+👨 User A (Initiator)
+Sign Up & Add Skills
 
-        Backend handles:
-          - Matching logic
-          - Real-time session sync
-          - Skill profiles & history
-          - Notifications & feedback
-          - (Optional) Skill tokens system
+Registers on the platform
+
+List the skills they offer and the skills they want to learn
+
+Browse or Search Skills
+
+Explores available users with matching skills
+
+Send Skill Trade Request
+
+Sends a request to another user (User B) for a skill trade session
+
+👨 User B (Receiver)
+Sign Up & Add Skills
+
+Registers on the platform
+
+Lists the skills they offer and want to learn
+
+Accept Skill Trade Request
+
+Reviews incoming request from User A
+
+Accepts the trade if skills match their interest
+
+✅ Match Found
+Once User B accepts, a match is confirmed.
+
+📅 Scheduling & Session
+Set Schedule & Time (Both Users)
+
+Both users coordinate and set a mutually convenient time
+
+A real-time session is scheduled (Video/Chat based)
+
+Live Skill Exchange Session
+
+Users engage in a real-time session to teach and learn
+
+🌟 Post-Session
+Exchange Ratings & Feedback
+
+Both users rate each other
+
+Share feedback to help build trust in the community
+
+🔁 Repeat or Subscribe for More
+Users can continue trading skills, explore new matches, or subscribe for premium features.
+
+
+
+
