@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Barly Chat</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background-color: #fff;
+    }
+    #chat-container {
+      max-width: 600px;
+      margin: 50px auto;
+      border: 2px solid #ff5e3a;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    #chat-box {
+      height: 400px;
+      overflow-y: scroll;
+      padding: 15px;
+      background: #fff;
+      border-bottom: 2px solid #ff5e3a;
+    }
+    .message {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 80%;
+    }
+    .sent {
+      background: #ff5e3a;
+      color: white;
+      margin-left: auto;
+      text-align: right;
+    }
+    .received {
+      background: #eee;
+      color: black;
+      margin-right: auto;
+      text-align: left;
+    }
+    #input-area {
+      display: flex;
+      padding: 10px;
+    }
+    #message-input {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid #ff5e3a;
+      border-radius: 6px;
+      margin-right: 10px;
+    }
+    #send-button {
+      padding: 10px 20px;
+      background-color: #ff5e3a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getDatabase, ref, push, set, onChildAdded } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC-fnQF7pACm1yb7t_2EnmiEv-fZPXImGw",
+      authDomain: "barly-chat.firebaseapp.com",
+      databaseURL: "https://barly-chat-default-rtdb.firebaseio.com",
+      projectId: "barly-chat",
+      storageBucket: "barly-chat.firebasestorage.app",
+      messagingSenderId: "620754037295",
+      appId: "1:620754037295:web:45ac945685e63ee50ab4da",
+      measurementId: "G-0ZSYWLQX90"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth();
+
+    let currentUserId = null;
+    const otherUserId = "user_b"; // 🔁 Change this to the person you're chatting with
+
+    signInAnonymously(auth).catch(console.error);
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUserId = user.uid;
+        const roomId = makeRoomId(currentUserId, otherUserId);
+        listenForMessages(roomId);
+      }
+    });
+
+    function makeRoomId(user1, user2) {
+      return [user1, user2].sort().join("_");
+    }
+
+    function sendMessage(roomId, text) {
+      const msgRef = push(ref(db, `conversations/${roomId}/messages`));
+      set(msgRef, {
+        text,
+        sender: currentUserId,
+        timestamp: Date.now()
+      });
+    }
+
+    function listenForMessages(roomId) {
+      const msgRef = ref(db, `conversations/${roomId}/messages`);
+      onChildAdded(msgRef, (snapshot) => {
+        const msg = snapshot.val();
+        displayMessage(msg.text, msg.sender === currentUserId ? "sent" : "received");
+      });
+    }
+
+    function displayMessage(text, type) {
+      const chatBox = document.getElementById("chat-box");
+      const msgDiv = document.createElement("div");
+      msgDiv.className = `message ${type}`;
+      msgDiv.textContent = text;
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("send-button");
+      const input = document.getElementById("message-input");
+
+      btn.addEventListener("click", () => {
+        const text = input.value.trim();
+        if (text) {
+          const roomId = makeRoomId(currentUserId, otherUserId);
+          sendMessage(roomId, text);
+          input.value = "";
+        }
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div id="chat-container">
+    <div id="chat-box"></div>
+    <div id="input-area">
+      <input type="text" id="message-input" placeholder="Type your message..." />
+      <button id="send-button">Send</button>
+    </div>
+  </div>
+</body>
+</html>
